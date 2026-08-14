@@ -7,18 +7,40 @@ const productRoutes = require("./routes/product.routes");
 
 const app = express();
 
+const allowedOrigins = [
+  "https://frontend-8oc4.vercel.app",
+  "http://localhost:5173",
+];
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: function (origin, callback) {
+      // Allow requests from Postman/server-side clients
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(
+        new Error(`CORS blocked origin: ${origin}`)
+      );
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
   })
 );
 
 app.use(helmet());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(morgan("dev"));
 
+// Health check
 app.get("/api/health", (req, res) => {
   res.status(200).json({
     success: true,
@@ -26,6 +48,7 @@ app.get("/api/health", (req, res) => {
   });
 });
 
+// Root
 app.get("/", (req, res) => {
   res.send("Welcome to Rajdhani Dry Food API");
 });
