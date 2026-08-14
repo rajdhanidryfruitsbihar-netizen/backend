@@ -10,6 +10,7 @@ const app = express();
 const allowedOrigins = [
   "https://frontend-8oc4.vercel.app",
   "http://localhost:5173",
+  "https://rajdhani-dryfoods.vercel.app"
 ];
 
 app.use(
