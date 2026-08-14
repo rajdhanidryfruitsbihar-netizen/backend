@@ -20,12 +20,20 @@
     "express-validator": "^7.3.2",
     "helmet": "^8.3.0",
     "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.9.1",
+    "mongoose": "^9.9.2",
     "morgan": "^1.11.0",
     "multer": "^2.2.0",
     "multer-storage-cloudinary": "^2.2.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rajdhanidryfruitsbihar-netizen/backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rajdhanidryfruitsbihar-netizen/backend/issues"
+  },
+  "homepage": "https://github.com/rajdhanidryfruitsbihar-netizen/backend#readme"
 }

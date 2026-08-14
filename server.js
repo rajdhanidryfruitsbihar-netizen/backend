@@ -3,25 +3,14 @@ require("dotenv").config();
 const app = require("./app");
 const connectDB = require("./config/db");
 
-let isConnected = false;
+const PORT = process.env.PORT || 5000;
 
-const connectDatabase = async () => {
-  if (isConnected) return;
-
+const startServer = async () => {
   await connectDB();
-  isConnected = true;
+
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
 };
 
-module.exports = async (req, res) => {
-  try {
-    await connectDatabase();
-    return app(req, res);
-  } catch (error) {
-    console.error("Server error:", error);
-
-    return res.status(500).json({
-      success: false,
-      message: "Internal server error",
-    });
-  }
-};
+startServer();
